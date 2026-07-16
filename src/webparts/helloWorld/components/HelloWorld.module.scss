@@ -1,0 +1,458 @@
+/**
+ * Archivo: HelloWorld.module.scss
+ * Descripción: Estilos CSS Modules para el componente HelloWorld.
+ * 
+ * Notas importantes:
+ * - Este archivo utiliza CSS Modules, lo que significa que los nombres de clase
+ *   se transforman automáticamente en identificadores únicos para evitar conflictos
+ *   de nombres globales.
+ * - Los estilos aquí definidos solo afectan al componente HelloWorld.
+ * - Se utiliza SCSS para aprovechar características como variables, mixins y nesting.
+ * 
+ * Autor: Manus AI
+ * Fecha: 2026
+ */
+
+// ============================================================================
+// VARIABLES Y COLORES (Paleta de Fluent UI)
+// ============================================================================
+
+$color-primary: #0078d4;        // Azul principal de Microsoft
+$color-accent: #107c10;         // Verde para estados activos
+$color-warning: #d83b01;        // Naranja/Rojo para estados inactivos
+$color-border: #e1e1e1;         // Gris claro para bordes
+$color-background-light: #f3f2f1; // Gris muy claro para fondos secundarios
+$color-text-primary: #323130;   // Gris oscuro para texto principal
+$color-text-secondary: #605e5c; // Gris medio para texto secundario
+
+$spacing-xs: 4px;
+$spacing-sm: 8px;
+$spacing-md: 16px;
+$spacing-lg: 20px;
+$spacing-xl: 24px;
+
+$border-radius: 4px;
+$box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+
+// ============================================================================
+// MIXINS (Funciones reutilizables)
+// ============================================================================
+
+/**
+ * Mixin para aplicar estilos de badge/etiqueta
+ * Utilizado para los estados (Activo, Inactivo)
+ */
+@mixin badge($background-color, $text-color: white) {
+  display: inline-block;
+  background-color: $background-color;
+  color: $text-color;
+  padding: $spacing-xs $spacing-sm;
+  border-radius: $border-radius;
+  font-size: 12px;
+  font-weight: 600;
+  text-align: center;
+  white-space: nowrap;
+}
+
+/**
+ * Mixin para aplicar estilos de flexbox
+ */
+@mixin flex-center {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/**
+ * Mixin para aplicar estilos de transición suave
+ */
+@mixin transition($property: all, $duration: 200ms, $timing: ease-in-out) {
+  transition: $property $duration $timing;
+}
+
+// ============================================================================
+// COMPONENTE PRINCIPAL: helloWorld
+// ============================================================================
+
+.helloWorld {
+  padding: $spacing-lg;
+  background-color: #ffffff;
+  border: 1px solid $color-border;
+  border-radius: $border-radius;
+  box-shadow: $box-shadow;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  color: $color-text-primary;
+
+  /**
+   * Variante para contexto de Teams
+   * Aplica estilos específicos cuando el Web Part se ejecuta en Teams
+   */
+  &.teams {
+    background-color: #f0f0f0;
+    border-color: $color-primary;
+
+    .welcome {
+      background-color: rgba(0, 120, 212, 0.05);
+      padding: $spacing-md;
+      border-radius: $border-radius;
+    }
+  }
+}
+
+// ============================================================================
+// SECCIÓN DE BIENVENIDA
+// ============================================================================
+
+.welcome {
+  text-align: center;
+  margin-bottom: $spacing-lg;
+  padding: $spacing-md;
+  background-color: $color-background-light;
+  border-radius: $border-radius;
+  @include transition(background-color);
+
+  &:hover {
+    background-color: darken($color-background-light, 5%);
+  }
+}
+
+.welcomeImage {
+  width: 100px;
+  height: 100px;
+  object-fit: contain;
+  margin-bottom: $spacing-md;
+}
+
+// ============================================================================
+// CONTENEDOR DE LA TABLA
+// ============================================================================
+
+.detailsListContainer {
+  margin-top: $spacing-lg;
+  border: 1px solid $color-border;
+  border-radius: $border-radius;
+  overflow: hidden;
+
+  /**
+   * Estilos para el encabezado de la tabla
+   */
+  :global(.ms-DetailsList-headerWrapper) {
+    background-color: $color-background-light;
+    border-bottom: 2px solid $color-border;
+  }
+
+  /**
+   * Estilos para las filas de la tabla
+   */
+  :global(.ms-DetailsRow) {
+    border-bottom: 1px solid $color-border;
+    @include transition(background-color);
+
+    &:hover {
+      background-color: rgba($color-primary, 0.05);
+    }
+  }
+
+  /**
+   * Estilos para las filas seleccionadas
+   */
+  :global(.ms-DetailsRow.is-selected) {
+    background-color: rgba($color-primary, 0.1);
+  }
+}
+
+// ============================================================================
+// RENDERIZADO PERSONALIZADO: ESTADOS
+// ============================================================================
+
+/**
+ * Estilo para el estado "Activo"
+ * Utiliza el color verde de Fluent UI
+ */
+.statusActive {
+  @include badge($color-accent, white);
+}
+
+/**
+ * Estilo para el estado "Inactivo"
+ * Utiliza el color rojo/naranja de Fluent UI
+ */
+.statusInactive {
+  @include badge($color-warning, white);
+}
+
+/**
+ * Estilo para el estado "Pendiente"
+ * Utiliza un color amarillo/naranja
+ */
+.statusPending {
+  @include badge(#ffb900, #323130);
+}
+
+// ============================================================================
+// ENCABEZADOS DE GRUPO
+// ============================================================================
+
+.groupHeader {
+  display: flex;
+  align-items: center;
+  padding: $spacing-sm $spacing-md;
+  background-color: $color-background-light;
+  border-bottom: 2px solid $color-border;
+  font-weight: 600;
+  cursor: pointer;
+  user-select: none;
+  @include transition(background-color);
+
+  &:hover {
+    background-color: darken($color-background-light, 8%);
+  }
+
+  &:active {
+    background-color: darken($color-background-light, 12%);
+  }
+}
+
+.groupHeaderIcon {
+  margin-right: $spacing-sm;
+  color: $color-primary;
+}
+
+.groupHeaderText {
+  font-size: 14px;
+  font-weight: 600;
+  color: $color-text-primary;
+}
+
+
+// ============================================================================
+// MODAL
+// ============================================================================
+
+.modalContent {
+  padding: $spacing-xl;
+  min-width: 400px;
+
+  .modalHeader {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: $spacing-lg;
+    border-bottom: 1px solid $color-border;
+    padding-bottom: $spacing-md;
+  }
+
+  .modalTitle {
+    font-size: 18px;
+    font-weight: 600;
+    color: $color-text-primary;
+  }
+
+  .modalBody {
+    margin-bottom: $spacing-lg;
+    line-height: 1.6;
+    color: $color-text-secondary;
+  }
+
+  .modalFooter {
+    display: flex;
+    justify-content: flex-end;
+    gap: $spacing-md;
+    padding-top: $spacing-md;
+    border-top: 1px solid $color-border;
+  }
+}
+
+// ============================================================================
+// UTILIDADES Y CLASES AUXILIARES
+// ============================================================================
+
+.centeredColumn {
+  text-align: center !important;
+  justify-content: center;
+  display: flex;
+  align-items: center;
+}
+
+/**
+ * Clase para centrar solo el encabezado de la columna
+ * Usa text-align en lugar de flexbox para no interferir con Fluent UI
+ */
+.centeredColumnHeader {
+  text-align: center !important;
+}
+
+
+/**
+ * Clase para ocultar elementos en dispositivos móviles
+ */
+.hideOnMobile {
+  @media (max-width: 768px) {
+    display: none;
+  }
+}
+
+/**
+ * Clase para ocultar elementos en escritorio
+ */
+.hideOnDesktop {
+  @media (min-width: 769px) {
+    display: none;
+  }
+}
+
+/**
+ * Clase para texto truncado con elipsis
+ */
+.textEllipsis {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+/**
+ * Clase para contenedor con scroll horizontal
+ */
+.scrollableContainer {
+  overflow-x: auto;
+  overflow-y: hidden;
+  -webkit-overflow-scrolling: touch;
+
+  /**
+   * Estilo personalizado para la barra de desplazamiento
+   */
+  &::-webkit-scrollbar {
+    height: 8px;
+  }
+
+  &::-webkit-scrollbar-track {
+    background: $color-background-light;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background: $color-border;
+    border-radius: $border-radius;
+
+    &:hover {
+      background: darken($color-border, 20%);
+    }
+  }
+}
+
+// ============================================================================
+// RESPONSIVE DESIGN
+// ============================================================================
+
+/**
+ * Estilos para tablets (768px a 1024px)
+ */
+@media (max-width: 1024px) {
+  .helloWorld {
+    padding: $spacing-md;
+  }
+
+  .detailsListContainer {
+    margin-top: $spacing-md;
+  }
+}
+
+/**
+ * Estilos para dispositivos móviles (menos de 768px)
+ */
+@media (max-width: 768px) {
+  .helloWorld {
+    padding: $spacing-sm;
+  }
+
+  .welcome {
+    padding: $spacing-sm;
+    margin-bottom: $spacing-md;
+  }
+
+  .welcomeImage {
+    width: 80px;
+    height: 80px;
+  }
+
+  .detailsListContainer {
+    margin-top: $spacing-md;
+    border-radius: 0;
+  }
+
+  .modalContent {
+    min-width: 90vw;
+    max-width: 100%;
+  }
+}
+
+// ============================================================================
+// TEMAS: DARK MODE (si se implementa)
+// ============================================================================
+
+/**
+ * Estilos para tema oscuro
+ * Se aplicarían cuando isDarkTheme sea true
+ */
+.darkTheme {
+  background-color: #1f1f1f;
+  color: #ffffff;
+
+  .welcome {
+    background-color: rgba(255, 255, 255, 0.1);
+  }
+
+  .groupHeader {
+    background-color: rgba(255, 255, 255, 0.08);
+    color: #ffffff;
+  }
+
+  .detailsListContainer {
+    border-color: rgba(255, 255, 255, 0.2);
+
+    :global(.ms-DetailsRow) {
+      border-bottom-color: rgba(255, 255, 255, 0.1);
+
+      &:hover {
+        background-color: rgba(255, 255, 255, 0.08);
+      }
+    }
+  }
+}
+
+// ============================================================================
+// ANIMACIONES
+// ============================================================================
+
+/**
+ * Animación de entrada suave
+ */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.fadeInAnimation {
+  animation: fadeIn 300ms ease-in-out;
+}
+
+/**
+ * Animación de rotación para iconos de carga
+ */
+@keyframes spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.spinAnimation {
+  animation: spin 1s linear infinite;
+}

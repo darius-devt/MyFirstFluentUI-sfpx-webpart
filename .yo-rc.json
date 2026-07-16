@@ -1,0 +1,21 @@
+{
+  "@microsoft/generator-sharepoint": {
+    "plusBeta": false,
+    "isCreatingSolution": true,
+    "nodeVersion": "18.20.8",
+    "sdksVersions": {
+      "@microsoft/microsoft-graph-client": "3.0.2",
+      "@microsoft/teams-js": "2.24.0"
+    },
+    "version": "1.20.0",
+    "libraryName": "my-first-fluent-ui",
+    "libraryId": "cde77e93-f31d-4c33-b4ea-eb807efc3583",
+    "environment": "spo",
+    "packageManager": "npm",
+    "solutionName": "MyFirstFluentUI",
+    "solutionShortDescription": "MyFirstFluentUI description",
+    "skipFeatureDeployment": true,
+    "isDomainIsolated": false,
+    "componentType": "webpart"
+  }
+}

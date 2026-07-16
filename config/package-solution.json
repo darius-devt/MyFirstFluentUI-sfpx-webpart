@@ -1,0 +1,40 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/spfx-build/package-solution.schema.json",
+  "solution": {
+    "name": "my-first-fluent-ui-client-side-solution",
+    "id": "cde77e93-f31d-4c33-b4ea-eb807efc3583",
+    "version": "1.0.0.0",
+    "includeClientSideAssets": true,
+    "skipFeatureDeployment": true,
+    "isDomainIsolated": false,
+    "developer": {
+      "name": "",
+      "websiteUrl": "",
+      "privacyUrl": "",
+      "termsOfUseUrl": "",
+      "mpnId": "Undefined-1.20.0"
+    },
+    "metadata": {
+      "shortDescription": {
+        "default": "MyFirstFluentUI description"
+      },
+      "longDescription": {
+        "default": "MyFirstFluentUI description"
+      },
+      "screenshotPaths": [],
+      "videoUrl": "",
+      "categories": []
+    },
+    "features": [
+      {
+        "title": "my-first-fluent-ui Feature",
+        "description": "The feature that activates elements of the my-first-fluent-ui solution.",
+        "id": "01185db8-c25d-460e-972d-109baab45b8d",
+        "version": "1.0.0.0"
+      }
+    ]
+  },
+  "paths": {
+    "zippedPackage": "solution/my-first-fluent-ui.sppkg"
+  }
+}
