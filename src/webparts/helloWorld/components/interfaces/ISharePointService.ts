@@ -4,9 +4,6 @@
  * 
  * Esta interfaz garantiza que cualquier implementación del servicio
  * cumpla con los métodos necesarios para interactuar con SharePoint.
- * 
- * Autor: Manus AI
- * Fecha: 2026
  */
 
 import { IDataItem } from './IDataTypes';

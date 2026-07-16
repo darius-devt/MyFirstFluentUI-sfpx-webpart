@@ -10,9 +10,6 @@
  * - Service Pattern: Centraliza la lógica de datos
  * - Dependency Injection: Recibe SPHttpClient en el constructor
  * - Promise-based: Usa async/await para mejor legibilidad
- * 
- * Autor: Manus AI
- * Fecha: 2026
  */
 
 import { SPHttpClient, SPHttpClientResponse } from '@microsoft/sp-http';
